@@ -50,9 +50,9 @@ pip install -r requirements.txt
 
 # Télécharger les ressources NLTK
 python
->>> import nltk
->>> nltk.download('punkt')
->>> nltk.download('stopwords')
+ import nltk
+ nltk.download('punkt')
+ nltk.download('stopwords')
 
 # Lancer l'application
 python app.py
@@ -61,8 +61,11 @@ python app.py
 
 assistant-poo/
 ├── app.py               # Script principal (interface graphique + moteur NLP)
+
 ├── knowledge_base.txt   # Base de définitions de concepts POO
+
 ├── example_base.txt     # Base d'exemples de code pour chaque concept
+
 ├── requirements.txt     # Fichier de dépendances
 
 
