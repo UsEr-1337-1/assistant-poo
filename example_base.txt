@@ -1,0 +1,292 @@
+
+# --- Exemple Base enrichie ---
+example_base = {
+    "classe": """class Voiture:
+    def __init__(self, marque):
+        self.marque = marque
+    def klaxonner(self):
+        print("Bip Bip!")""",
+
+    "objet": """voiture1 = Voiture("Toyota")
+voiture1.klaxonner()  # Instanciation et appel d'une méthode""",
+
+    "héritage": """class Animal:
+    def parler(self):
+        print("Je fais un bruit.")
+
+class Chien(Animal):
+    def parler(self):
+        print("Wouf Wouf!")
+
+chien = Chien()
+chien.parler()  # Wouf Wouf!""",
+
+    "encapsulation": """class CompteBancaire:
+    def __init__(self, solde):
+        self.__solde = solde  # attribut privé
+    def deposer(self, montant):
+        self.__solde += montant
+    def afficher_solde(self):
+        print(f"Solde: {self.__solde}")""",
+
+    "polymorphisme": """class Oiseau:
+    def voler(self):
+        print("Je vole dans le ciel.")
+
+class Avion:
+    def voler(self):
+        print("Je vole avec un moteur.")
+
+for obj in (Oiseau(), Avion()):
+    obj.voler()""",
+
+    "abstraction": """from abc import ABC, abstractmethod
+
+class Forme(ABC):
+    @abstractmethod
+    def aire(self):
+        pass
+
+class Cercle(Forme):
+    def __init__(self, rayon):
+        self.rayon = rayon
+    def aire(self):
+        return 3.14 * self.rayon ** 2""",
+
+    "interface": """from abc import ABC, abstractmethod
+
+class Volant(ABC):
+    @abstractmethod
+    def voler(self):
+        pass
+
+class Avion(Volant):
+    def voler(self):
+        print("Je vole!")""",
+
+    "association": """class Moteur:
+    pass
+
+class Voiture:
+    def __init__(self, moteur):
+        self.moteur = moteur  # Voiture et Moteur associés
+
+m = Moteur()
+v = Voiture(m)""",
+
+    "composition": """class Pneu:
+    pass
+
+class Voiture:
+    def __init__(self):
+        self.pneus = [Pneu() for _ in range(4)]  # relation de composition""",
+
+    "aggregation": """class Livre:
+    def __init__(self, titre):
+        self.titre = titre
+
+class Bibliotheque:
+    def __init__(self, livres):
+        self.livres = livres  # agrégation de livres existants
+
+l1 = Livre("1984")
+l2 = Livre("Le Meilleur des Mondes")
+b = Bibliotheque([l1, l2])""",
+
+    "couplage": """class MoteurInterface:
+    def demarrer(self):
+        raise NotImplementedError
+
+class MoteurEssence(MoteurInterface):
+    def demarrer(self):
+        print("Démarrage essence")
+
+class Voiture:
+    def __init__(self, moteur: MoteurInterface):
+        self.moteur = moteur  # couplage faible
+
+v = Voiture(MoteurEssence())
+v.moteur.demarrer()""",
+
+    "cohésion": """class CompteBancaire:
+    def __init__(self, solde=0):
+        self._solde = solde
+    def deposer(self, montant):
+        self._solde += montant
+    def retirer(self, montant):
+        self._solde -= montant
+    def afficher_solde(self):
+        print(f"Solde: {self._solde}")  # haute cohésion""",
+
+    "diagramme de classes uml": """\"\"\"  
++--------------+          +----------+  
+|   Voiture    |<>--------|  Moteur  |  
++--------------+          +----------+  
+| - marque     |          | - type   |  
++--------------+          +----------+  
+| + klaxonner()|  
++--------------+  
+\"\"\"""",
+
+    "singleton": """class Singleton:
+    _instance = None
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+s1 = Singleton()
+s2 = Singleton()
+print(s1 is s2)  # True""",
+
+    "factory method": """class Animal:
+    def parler(self): pass
+
+class Chien(Animal):
+    def parler(self): print("Wouf")
+
+class Chat(Animal):
+    def parler(self): print("Miaou")
+
+class AnimalFactory:
+    @staticmethod
+    def creer(type_animal):
+        if type_animal == "chien": return Chien()
+        if type_animal == "chat":  return Chat()
+        raise ValueError("Type inconnu")
+
+a = AnimalFactory.creer("chat")
+a.parler()""",
+
+    "observer": """class Sujet:
+    def __init__(self):
+        self._obs = []
+    def ajouter(self, o):
+        self._obs.append(o)
+    def notifier(self, msg):
+        for o in self._obs:
+            o.mettre_a_jour(msg)
+
+class Observateur:
+    def mettre_a_jour(self, msg):
+        print("Notif:", msg)
+
+s = Sujet()
+o = Observateur()
+s.ajouter(o)
+s.notifier("Nouvelle donnée")""",
+
+    "stratégie": """class StrategieTri:
+    def trier(self, data): pass
+
+class TriBulle(StrategieTri):
+    def trier(self, data):
+        return data.sort()  # tri à bulles
+
+class Contexte:
+    def __init__(self, strategie: StrategieTri):
+        self._strategie = strategie
+    def executer(self, data):
+        return self._strategie.trier(data)
+
+ctx = Contexte(TriBulle())
+ctx.executer([3,1,2])""",
+
+    "adaptateur": """class ServiceExistant:
+    def obtenir(self): return "données brutes"
+
+class Adaptateur:
+    def __init__(self, svc):
+        self.svc = svc
+    def requete(self):
+        return self.svc.obtenir()
+
+adapt = Adaptateur(ServiceExistant())
+print(adapt.requete())""",
+
+    "decorateur": """def decorateur(f):
+    def inner(*args, **kw):
+        print("Avant")
+        res = f(*args, **kw)
+        print("Après")
+        return res
+    return inner
+
+@decorateur
+def bonjour():
+    print("Bonjour!")
+
+bonjour()""",
+
+    "facade": """class A:
+    def opA(self): print("A")
+class B:
+    def opB(self): print("B")
+
+class Facade:
+    def __init__(self):
+        self.a = A(); self.b = B()
+    def op_simple(self):
+        self.a.opA(); self.b.opB()
+
+fac = Facade()
+fac.op_simple()""",
+
+    "srp": """# SRP : chaque classe a une seule responsabilité
+class GestionnaireFichier:
+    def lire(self, path): return open(path).read()
+
+class Analyseur:
+    def analyser(self, contenu): pass""",
+
+    "ocp": """from abc import ABC, abstractmethod
+
+class Operation(ABC):
+    @abstractmethod
+    def calculer(self, a, b): pass
+
+class Addition(Operation):
+    def calculer(self, a, b): return a + b
+
+class Multiplication(Operation):
+    def calculer(self, a, b): return a * b
+
+# Ajout facile d'une nouvelle opération sans modifier les existantes""",
+
+    "lsp": """class Oiseau:
+    def voler(self): print("Je vole")
+
+class Autruche(Oiseau):
+    def voler(self):
+        raise NotImplementedError  # viole LSP""",
+
+    "isp": """from abc import ABC, abstractmethod
+
+class Imprimante(ABC):
+    @abstractmethod
+    def imprimer(self, doc): pass
+
+class Scanner(ABC):
+    @abstractmethod
+    def scanner(self, doc): pass
+
+class ToutEnUn(Imprimante, Scanner):
+    def imprimer(self, doc): print("Impression")
+    def scanner(self,  doc): print("Scan")""",
+
+    "dip": """from abc import ABC, abstractmethod
+
+class Moteur(ABC):
+    @abstractmethod
+    def demarrer(self): pass
+
+class Electrique(Moteur):
+    def demarrer(self): print("Démarrage électrique")
+
+class Voiture:
+    def __init__(self, moteur: Moteur):
+        self.moteur = moteur
+
+v = Voiture(Electrique())
+v.moteur.demarrer()"""
+}

@@ -1,0 +1,29 @@
+# --- Bases de données ---
+# --- Knowledge Base ---
+knowledge_base = {
+    "classe": "Une classe est un plan pour créer des objets. Elle définit des attributs (état) et des méthodes (comportements).",
+    "objet": "Un objet est une instance d'une classe, avec ses propres valeurs pour les attributs.",
+    "héritage": "Mécanisme par lequel une classe dérivée hérite des attributs et méthodes d'une classe de base.",
+    "encapsulation": "Protection des données internes d’un objet en limitant l’accès direct et en passant par des méthodes publiques.",
+    "polymorphisme": "Capacité de traiter des objets de classes différentes via une interface commune.",
+    "abstraction": "Masquage des détails complexes pour n’exposer que l’essentiel d’un composant.",
+    "interface": "Déclaration d’un contrat de méthodes sans en fournir l’implémentation, à réaliser dans les classes qui l’héritent.",
+    "association": "Relation structurelle entre instances, sans gestion de cycle de vie.",
+    "composition": "Forme forte d’association où la vie des objets composés dépend de l’objet composite.",
+    "aggregation": "Association faible où les objets agrégés peuvent exister indépendamment.",
+    "couplage": "Degré de dépendance entre modules ; un couplage faible est souhaitable.",
+    "cohésion": "Mesure de la cohérence interne d’un module ; une forte cohésion est souhaitable.",
+    "diagramme de classes uml": "Représentation graphique des classes, de leurs attributs, méthodes et relations.",
+    "singleton": "Pattern qui garantit qu’une classe n’a qu’une seule instance accessible globalement.",
+    "factory method": "Pattern qui définit une interface de création d’objets, laissant les sous-classes décider de la classe concrète.",
+    "observer": "Pattern d’abonnement où un sujet notifie automatiquement ses observateurs en cas de changement d’état.",
+    "stratégie": "Pattern qui permet de définir une famille d’algorithmes interchangeables à chaud.",
+    "adaptateur": "Pattern qui rend compatibles deux interfaces incompatibles par un wrapper.",
+    "decorateur": "Pattern qui ajoute dynamiquement des responsabilités à un objet sans modifier sa classe.",
+    "facade": "Pattern qui fournit une interface simplifiée à un ensemble de sous-systèmes complexes.",
+    "srp": "Single Responsibility Principle : une classe ne doit avoir qu’une seule raison de changer.",
+    "ocp": "Open/Closed Principle : les entités doivent être ouvertes à l’extension, fermées à la modification.",
+    "lsp": "Liskov Substitution Principle : une sous-classe doit pouvoir remplacer sa super-classe sans altérer le comportement.",
+    "isp": "Interface Segregation Principle : privilégier plusieurs interfaces spécifiques plutôt qu’une interface générale.",
+    "dip": "Dependency Inversion Principle : dépendre d’abstractions plutôt que de classes concrètes."
+}
